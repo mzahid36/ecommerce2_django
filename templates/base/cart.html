@@ -1,0 +1,82 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %}<title>Cart</title>{% endblock title %}
+{% block content %}
+<section class="breadcrumb breadcrumb_bg" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>{{request.user | title}}</h2>
+                        <h2>Your cart is here.</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <h3 class="text-center mb-5">Customize you cart here. Increase/Decrease an item or Remove a product form the cart.</h3>
+    <div class="row">
+        
+        <div class="col-sm-6" style="margin-left:65px ;">
+            <div class="card">
+                <div class="card-body">
+                   
+                    {% for item in carts %}
+                    <div class="row">
+                        <div class="col-sm-3 text-center align-self-center"><img
+                                src="{{item.fooditem.food_img.url}}" alt="" srcset=""
+                                class="img-fluid img-thumbnail shadow-sm" height="150" width="150"> </div>
+                        <div class="col-sm-9">
+                            <div>
+                                <h5>{{item.fooditem.title}}</h5>
+                                <p class="mb-2 text-muted small">{{item.fooditem.description}}</p>
+                                <div class="my-3">
+                                    <label for="quantity">Quantity:</label>
+                                    <a class="minus-cart btn" pid="{{item.fooditem.id}}"><i class="fas fa-minus-square fa-lg"></i></a>
+                                    <span id="quantity">{{item.quantity}}</span>
+                                    <a class="plus-cart btn" pid="{{item.fooditem.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="#" class="btn btn-sm btn-info  text-white mr-3 remove-cart" pid="{{item.fooditem.id}}">Remove item </a>
+                                    <p class="mb-0"><span><strong>TK {{item.fooditem.price}}</strong></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="text-muted">
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-5">
+            <div class="card">
+                <div class="card-body">
+                    <h3>The Total Amount of</h3>
+                    <ul class="list-group">
+                        <li
+                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Amount<span>TK <span id="amount">{{amount}}</span></span></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                            Shipping<span>TK {{shipping_cost}}</span></li>
+                        <li
+                            class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                            <div>
+                                <strong>Total</strong> <small>(including VAT)</small>
+                            </div>
+                            <span><strong>TK <span id="totalamount">{{total_amount}}</span></strong></span>
+                        </li>
+                    </ul>
+                    <div class="d-grid"><a href="{% url 'checkout' %}" class="new btn btn-primary">Place Order</a></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

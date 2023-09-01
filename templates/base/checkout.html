@@ -1,0 +1,90 @@
+{% extends 'base/main.html' %}
+{% load static %}
+{% block title %}<title>Buy Now</title>{% endblock title %}
+{% block content %}
+
+<section class="breadcrumb breadcrumb_bg" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>Checkout</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    
+    <div class="row mt-5">
+        <div class="col-sm-6">
+            <h4>Order Summary</h4>
+            <p>Review all your items before placing order, you can make changes from cart.</p>
+            <hr>
+            {% for items in cart_items %}
+            <div class="card mb-3 gray_bg" style="max-width: 540px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="{{ items.fooditem.food_img.url }}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h5 class="card-title">{{items.fooditem.title}} <i class="fa-solid fa-xmark" style="color: #ff6426;"></i> {{items.quantity}}</h5>
+                      <p class="card-text">{{items.fooditem.description}}</p>
+                      <!-- <p class="card-text">${{items.fooditem.price}} * {{items.quantity}}</p> -->
+                      <p class="card-text">TK {{items.total_cost}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+            <div class="card mb-3 gray_bg" style="max-width: 540px;">
+                <div class="card-body">
+                    <p class="fw-bold" style="color: #ff6426;"> Total Cost + Shipping = {{totalamount}}</p>
+                </div>
+              </div>
+            
+        </div>
+
+        <div class="col-sm-4 offset-sm-1 ">
+            <h4>Select Shipping Address</h4>
+            <p>Please select correct shipping address.</p>
+            <hr>
+            <form action="/paymentdone">
+                {% for ad in add %}
+                <div class="card gray_bg">
+                    <div class="card-body">
+                        <h5>{{name.name}}</h5>
+                        <h5>{{name.phone}}</h5>
+                        <p>{{ad.holding_street_village}},{{ad.thana}},{{ad.district}},{{ad.division}},{{ad.zipcode}}</p>
+                    </div>
+                </div>
+                <div class="form-check mt-2 mb-5">
+                    <input class="form-check-input" name="custid" id="custadd{{forloop.counter}}" type="radio" value="{{ad.id}}">
+                    <label class="form-check-label fw-bold" for="custadd{{forloop.counter}}">
+                        Address: {{forloop.counter}} </label>
+                </div>
+                {% endfor %}
+
+                {%if messages %}
+                {% for message in messages %}
+                    <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>
+                        {{message}}
+                    </p>
+                {% endfor %}
+                <a href="{% url 'address' %}" class="new btn btn-info">Update Address</a>
+               {% else %}
+                <div class="text-end">
+                    <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+                </div>
+                {% endif %}
+                
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

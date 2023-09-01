@@ -1,0 +1,57 @@
+{% extends 'base/main.html '%}
+{% block title %} <title>Details</title> {% endblock title %}
+{% block content %}
+<section class="breadcrumb breadcrumb_bg" style="margin-top: 100px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner text-center">
+                    <div class="breadcrumb_iner_item">
+                        <h2>{{item.title}}</h2>
+                        <h4 style="color: #fff;">{{item.category |title}} item</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-sm-6 text-center align-self-center">
+            <img src="{{item.food_img.url}}" alt="" class="img-fluid img-thumbnail">
+        </div>
+        <div class="col-sm-5 offset-sm-1">
+            <h2>{{item.title}}</h2>
+            <hr>
+            <p>{{item.description}}</p>
+            <h3 style="margin: 20px 0px 20px 0px; color:#ff6426;">TK {{item.price}}</h3>
+
+            {% if exists %}
+            <a href="{% url 'cart'%}" class="new btn btn-warning shadow px-5 py-2 ms-4">Go to Cart</a>
+            {% else %}
+            <form action="{% url 'add-to-cart' %}" class="d-inline">
+                <input type="hidden" name="prod_id" value={{item.id}} id="prod_id">
+                <button type="submit" class="new btn btn-outline-danger" style="width: 150px;">Add to cart</button>
+            </form>
+            {% endif %}
+
+            {% if exists %}
+            <a href="{% url 'cart'%}" class="new btn btn-warning shadow px-4 py-2 ms-4">Already in Cart</a>
+            {% else %}
+            <form action="/buy" class="d-inline">
+                <input type="hidden" name="prod_id" value={{item.id}} id="prod_id">
+                <button type="submit" class="new btn btn-outline-danger"style="width: 150px;">Buy Now</button>
+            </form>
+            {% endif %}
+            <h5 class="mt-5">Available Offers</h5>
+            <ul>
+                <li>Bkash Offer 5% Unlimited Cashback on Payment</li>
+                <li>Special Price Get extra Tk.5000 off (price inclusive of discount)</li>
+                <li>Partner Offer Tk. 1000 Gift Card on Every 1000th Transaction with Bkash, Nagad.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,302 @@
+{% extends 'base/main.html '%}
+{% load static %}
+{% block title %} <title>Home</title> {% endblock title %}
+{% block content %}
+    <!-- banner part start-->
+    <section class="banner_part">
+        <div class="container">
+            <div class=" col align-items-center">
+                
+
+            </div>
+            <div class="row align-items-center">
+
+                <div class="col-lg-6">
+                    <div class="banner_text">
+                        <div class="banner_text_iner">
+                            <h5>Expensive but the best</h5>
+                            <h1>Deliciousness jumping into the mouth</h1>
+                            <p>Together creeping heaven upon third dominion be upon won't darkness rule land
+                                behold it created good saw after she'd Our set living. Signs midst dominion
+                                creepeth morning</p>
+                            <div class="banner_btn">
+                                <div class="banner_btn_iner">
+                                    <a href="{% url 'book' %}" class="btn_2">Reservation <img src="{% static 'img/icon/left_1.svg' %}" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- banner part start-->
+
+    <!--::exclusive_item_part start::-->
+    <section class="exclusive_item_part blog_item_section">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="section_tittle">
+                        <p>Popular Dishes</p>
+                        <h2>Our Signature Items</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for item in exclusive %}
+                <a href="{% url 'details' item.id %}">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="single_blog_item">
+                        <div class="single_blog_img">
+                            <img src="{{ item.food_img.url }}" alt="">
+                        </div>
+                        <div class="single_blog_text">
+                            <h3>{{item.title}}</h3>
+                            <p>{{item.description}} </p>
+                            <p style="color:#ff6426;">TK {{item.price}} </p>
+                            <a href="#" class="btn_3"></a>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!--::exclusive_item_part end::-->
+
+    <!-- about part start-->
+    <section class="about_part">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-sm-4 col-lg-5 offset-lg-1">
+                    <div class="about_img">
+                        <img src="{% static 'img/about.png' %}" alt="">
+                    </div>
+                </div>
+                <div class="col-sm-8 col-lg-4">
+                    <div class="about_text">
+                        <h5>Our History</h5>
+                        <h2>Where The Food’s As Good
+                            As The Root Beer.</h2>
+                        <h4>Satisfying people hunger for simple pleasures</h4>
+                        <p>May over was. Be signs two. Spirit. Brought said dry own firmament lesser best sixth deep
+                            abundantly bearing, him, gathering you
+                            blessed bearing he our position best ticket in month hole deep </p>
+                        <!-- <a href="#" class="btn_3">Read More <img src="{% static 'img/icon/left_2.svg' %}" alt=""></a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about part end-->
+
+    <!-- food_menu start-->
+    <section class="food_menu gray_bg">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-5">
+                    <div class="section_tittle">
+                        <p>Popular Menu</p>
+                        <h2>Delicious Food Menu</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="nav nav-tabs food_menu_nav" id="myTab" role="tablist">
+                       
+                        <a class="active" id="Special-tab" data-toggle="tab" href="#Special" role="tab"
+                            aria-controls="Special" aria-selected="false">Special <img src="{% static 'img/icon/play.svg' %}"
+                                alt="play"></a>
+
+                        <a id="Breakfast-tab" data-toggle="tab" href="#Breakfast" role="tab" aria-controls="Breakfast"
+                            aria-selected="false">Breakfast <img src="{% static 'img/icon/play.svg' %}" alt="play"></a>
+
+                        <a id="Launch-tab" data-toggle="tab" href="#Launch" role="tab" aria-controls="Launch"
+                            aria-selected="false">Launch <img src="{% static 'img/icon/play.svg' %}" alt="play"></a>
+
+                        <a id="Dinner-tab" data-toggle="tab" href="#Dinner" role="tab" aria-controls="Dinner"
+                            aria-selected="false">Dinner <img src="{% static 'img/icon/play.svg' %}" alt="play"> </a>
+
+                        <a id="Sneaks-tab" data-toggle="tab" href="#Sneaks" role="tab" aria-controls="Sneaks"
+                            aria-selected="false">Snacks <img src="{% static 'img/icon/play.svg' %}" alt="play"></a>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active single-member" id="Special" role="tabpanel"
+                            aria-labelledby="Special-tab">
+                            <div class="row">
+                                {% for food in fooditem %}
+                                <div class="col-sm-6 col-lg-6"> 
+                                    <a href="{% url 'details' food.id %}">
+                                    <div class="single_food_item media">
+                                        <img src="{{food.food_img.url}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{food.title}}</h3>
+                                            <p>{{food.description}}</p>
+                                            <h5>TK {{food.price}}</h5>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade single-member" id="Breakfast" role="tabpanel"
+                            aria-labelledby="Breakfast-tab">
+                            <div class="row">
+                                {% for food in breakfirst %}
+                                <div class="col-sm-6 col-lg-6"> 
+                                    <a href="{% url 'details' food.id %}">
+                                    <div class="single_food_item media">
+                                        <img src="{{food.food_img.url}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{food.title}}</h3>
+                                            <p>{{food.description}}</p>
+                                            <h5>TK {{food.price}}</h5>
+                                        </div>
+                                    </div>
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade single-member" id="Launch" role="tabpanel"
+                            aria-labelledby="Launch-tab">
+                            <div class="row">
+                                {% for food in lunch %}
+                                <div class="col-sm-6 col-lg-6">
+                                    <a href="{% url 'details' food.id %}">
+                                    <div class="single_food_item media">
+                                        <img src="{{food.food_img.url}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{food.title}}</h3>
+                                            <p>{{food.description}}</p>
+                                            <h5>TK {{food.price}}</h5>
+                                        </div>
+                                    </div>
+                                </a> 
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="tab-pane fade single-member" id="Dinner" role="tabpanel"
+                            aria-labelledby="Dinner-tab">
+                            <div class="row">
+                                {% for food in dinner %}
+                                <div class="col-sm-6 col-lg-6"> 
+                                    <a href="{% url 'details' food.id %}">
+                                    <div class="single_food_item media">
+                                        <img src="{{food.food_img.url}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{food.title}}</h3>
+                                            <p>{{food.description}}</p>
+                                            <h5>TK {{food.price}}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                        </div>
+                        <div class="tab-pane fade single-member" id="Sneaks" role="tabpanel"
+                            aria-labelledby="Sneaks-tab">
+                            <div class="row">
+                                {% for food in snacks %}
+                                <div class="col-sm-6 col-lg-6"> 
+                                    <a href="{% url 'details' food.id %}">
+                                    <div class="single_food_item media">
+                                        <img src="{{food.food_img.url}}" class="mr-3" alt="...">
+                                        <div class="media-body align-self-center">
+                                            <h3>{{food.title}}</h3>
+                                            <p>{{food.description}}</p>
+                                            <h5>TK {{food.price}}</h5>
+                                        </div>
+                                    </div>
+                                </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- food_menu part end-->
+
+    <!--::chefs_part start::-->
+    <section class="chefs_part blog_item_section section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="section_tittle">
+                        <p>Team Member</p>
+                        <h2>Our Experience Chefs</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for chef in chefs %}
+                <div class="col-sm-6 col-lg-4">
+                    <div class="single_blog_item">
+                        <div class="single_blog_img">
+                            <img src="{{chef.chef_img.url}}" alt="">
+                        </div>
+                        <div class="single_blog_text text-center">
+                            <h3>{{chef.name}}</h3>
+                            <p>{{chef.designation}}</p>
+                            <div class="social_icon">
+                                <a href="{{chef.fb_link}}" target="_blank"> <i class="ti-facebook"></i> </a>
+                                <a href="{{chef.tw_link}}" target="_blank"> <i class="ti-twitter-alt"></i> </a>
+                                <a href="{{chef.ins_link}}" target="_blank"> <i class="ti-instagram"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!--::chefs_part end::-->
+
+    <!--::exclusive_item_part start::-->
+    {% if top_sell %}
+    <section class="blog_item_section blog_section " style="margin-bottom: 20px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5">
+                    <div class="section_tittle">
+                        <p>Recent News</p>
+                        <h2>Our Top Sell</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for item in top_sell %}
+                <a href="{% url 'details' item.id %}">
+                <div class="col-sm-6 col-lg-4">
+                    <div class="single_blog_item">
+                        <div class="single_blog_img">
+                            <img src="{{ item.food_img.url }}" alt="">
+                        </div>
+                        <div class="single_blog_text">
+                            <h3>{{item.title}}</h3>
+                            <p>{{item.description}} </p>
+                            <p style="color:#ff6426;">TK {{item.price}} </p>
+                            <a href="#" class="btn_3"></a>
+                        </div>
+                    </div>
+                </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <!--::exclusive_item_part end::-->
+
+   {% endblock content %}
